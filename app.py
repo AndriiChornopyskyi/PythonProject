@@ -5,7 +5,9 @@ app = Flask(__name__)
 # Створимо словник для зберігання даних (CRUD)
 data = {}
 id_counter = 1
-
+@app.route('/')
+def home():
+    return "API працює. Використовуйте /data для POST, PUT, GET, DELETE."
 @app.route('/data', methods=['GET'])
 def get_data():
     return jsonify(data), 200
