@@ -56,7 +56,11 @@ def delete_data():
 
 @app.route('/healthz')
 def healthz():
-    return "OK", 200
+    try:
+        db.engine.execute('SELECT 1')
+        return "OK", 200
+    except Exception as e:
+        return f"Database connection error: {str(e)}", 500
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=8080)
