@@ -57,10 +57,12 @@ def delete_data():
 @app.route('/healthz')
 def healthz():
     try:
-        db.engine.execute('SELECT 1')
-        return "OK", 200
-    except Exception as e:
-        return f"Database connection error: {str(e)}", 500
+           # Використовуємо db.session, щоб здійснити простий запит до бази даних
+           db.session.execute('SELECT 1')
+           db.session.commit()  # Комітити не обов'язково, але корисно для перевірки з'єднання
+           return 'Database is connected!', 200
+       except Exception as e:
+           return f'Database connection error: {str(e)}', 500
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=8080)
