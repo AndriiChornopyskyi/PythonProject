@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://pythondb_jrac_user:7jsGVIrSNl8YrYorlAC6J8dduBFXxapZ@dpg-d0aarl8gjchc73c8ejfg-a.oregon-postgres.render.com/pythondb_jrac'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
