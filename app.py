@@ -14,6 +14,10 @@ class Data(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     value = db.Column(db.String(200), nullable=False)
 
+# Створення таблиць при запуску
+with app.app_context():
+    db.create_all()
+
 @app.route('/')
 def home():
     return "API працює. Використовуйте /data для POST, PUT, GET, DELETE."
@@ -63,4 +67,6 @@ def healthz():
         return f"Database connection error: {str(e)}", 500
 
 if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
     app.run(debug=True, host='0.0.0.0', port=8080)
