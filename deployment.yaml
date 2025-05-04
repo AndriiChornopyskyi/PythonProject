@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-crud-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flask-crud
+  template:
+    metadata:
+      labels:
+        app: flask-crud
+    spec:
+      containers:
+        - name: flask-crud
+          image: flask-crud-api
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 8080
+          env:
+            - name: DATABASE_URL
+              value: postgresql://postgres:password@postgres:5432/postgres
